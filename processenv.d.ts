@@ -1,3 +1,4 @@
+import { Dialect } from "sequelize";
 
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -6,8 +7,9 @@ declare namespace NodeJS {
     API_KEY: string; // Example of a required variable
     DATABASE_HOST: string;
     DATABASE_NAME: string;
-    DATABASE_DIALECT: string;
+    DATABASE_USERNAME: string;
     DATABASE_PASSWORD: string;
+    DATABASE_DIALECT: Dialect;
     DATABASE_PORT: string;
     DEFAULT_PASSWORD: string;
     SERVER_PORT: string;
