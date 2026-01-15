@@ -5,8 +5,9 @@ import express from "express"
 import morgan from "morgan";
 import config from "./config/config.js";
 import sequelize, { connectDb } from "./config/db.config.js";
-import authRoutes from "./routes/auth.router.js";
 import errorResponseHandeler from "./middleware/errorhandeler.js";
+import authRoutes from "./routes/auth.router.js";
+import jobRoutes from "./routes/Job.router.js";
 
 const server = express();
 server.use(cors())
@@ -17,6 +18,7 @@ server.use(express.static("./public"));
 
 // routes
 server.use("/v1/auth", authRoutes);
+server.use("/v1/job", jobRoutes);
 server.use((req, res) => {
   res.status(404).json({ error: true, message: "resource not found" })
 });

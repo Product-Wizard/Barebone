@@ -50,7 +50,7 @@ Organization.init({
   }
 }, {
   sequelize: sequelize,
-  modelName: "Organization",
+  modelName: "organization",
 });
 
 export default Organization;
