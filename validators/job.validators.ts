@@ -8,7 +8,7 @@ const createJobValidator = Joi.object<CreateJobType>({
   description: Joi.string().required(),
   location: Joi.string().required(),
   organization_id: Joi.number().required(),
-  type: Joi.string().required().valid('remote', 'on-site', 'hybrid'),
+  type: Joi.string().required().valid("marketing", "tech", "admin", "research", "finance", "design"),
 });
 
 const JobValidators = {

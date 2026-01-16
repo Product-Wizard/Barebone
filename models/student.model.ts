@@ -8,6 +8,7 @@ export interface StudentModelInterface {
   email: string;
   full_name: string;
   year_of_study: year_of_study;
+  course_of_study: string;
   password?: string;
   defaultPassword: boolean;
 }
@@ -38,6 +39,10 @@ Student.init({
     allowNull: false,
   },
   password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  course_of_study: {
     type: DataTypes.STRING,
     allowNull: false,
   },

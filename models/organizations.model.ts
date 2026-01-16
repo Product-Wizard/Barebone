@@ -7,6 +7,7 @@ export interface OrganizationModelInterface {
   id: number;
   email: string;
   company_name: string;
+  industry: string;
   company_size: company_size;
   password?: string;
   defaultPassword: boolean;
@@ -32,6 +33,10 @@ Organization.init({
     allowNull: false,
   },
   company_name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  industry: {
     type: DataTypes.STRING,
     allowNull: false,
   },

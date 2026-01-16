@@ -2,7 +2,7 @@ import { DataTypes, Model, } from "sequelize";
 import sequelize from "../config/db.config";
 
 export type JobType = 'remote' | 'on-site' | 'hybrid';
-export type CategoryType = "marketing" | "tech" | "admin" | "research";
+export type CategoryType = "marketing" | "tech" | "admin" | "research" | "finance" | "design";
 export interface JobModelInterface {
   id: string;
   title: string;
