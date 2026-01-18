@@ -1,11 +1,17 @@
 import { Router } from "express";
-import jobController from "../controllers/job.controller";
+import jobController from "../controllers/job.controller.js";
 const {
-  createJob
+  createJob,
+  deleteJob,
+  updateJob,
+  getJobs
 } = jobController
 
 const jobRoutes = Router();
 
-jobRoutes.post("/create", createJob);
+jobRoutes.get("/", getJobs);
+jobRoutes.post("/", createJob);
+jobRoutes.delete("/:id", deleteJob);
+jobRoutes.put("/:id", updateJob);
 
 export default jobRoutes;

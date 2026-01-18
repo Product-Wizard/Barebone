@@ -13,5 +13,7 @@ declare namespace NodeJS {
     DATABASE_PORT: string;
     DEFAULT_PASSWORD: string;
     SERVER_PORT: string;
+    JWT_SECRET: string;
+    JWT_EXPIRES: string;
   }
 }

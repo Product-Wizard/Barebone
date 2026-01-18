@@ -1,3 +1,7 @@
 /node_modules
+/dist
 .env
 tasks.txt
+
+# SCRIPTS
+test.ts 

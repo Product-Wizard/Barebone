@@ -1,6 +1,6 @@
 import { DataTypes, Model, } from "sequelize";
 
-import sequelize from "../config/db.config";
+import sequelize from "../config/db.config.js";
 
 export type year_of_study = "fresh_man" | "sophomore" | "junior" | "senior";
 export interface StudentModelInterface {

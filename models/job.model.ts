@@ -1,6 +1,5 @@
 import { DataTypes, Model, } from "sequelize";
-import sequelize from "../config/db.config";
-
+import sequelize from "../config/db.config.js";
 export type JobType = 'remote' | 'on-site' | 'hybrid';
 export type CategoryType = "marketing" | "tech" | "admin" | "research" | "finance" | "design";
 export interface JobModelInterface {
@@ -9,14 +8,17 @@ export interface JobModelInterface {
   company: string;
   location: string;
   type: JobType;
-  category: string;
-  organization_id: number;
+  category: CategoryType;
+  link: string;
+  // organization_id: number;
   postedDate: string;
   description: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
 }
 export type CreateJobType = Omit<JobModelInterface, "id" | "postedDate">
 
-class Job extends Model<JobModelInterface, CreateJobType> {
+class Job extends Model<Omit<JobModelInterface, "createdAt" | "updatedAt">, CreateJobType> {
   getJobData() {
     const data = this.dataValues;
     return data;
@@ -45,8 +47,8 @@ Job.init({
     type: DataTypes.STRING,
     allowNull: false
   },
-  organization_id: {
-    type: DataTypes.INTEGER,
+  link: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
   description: {

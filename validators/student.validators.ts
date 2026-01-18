@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { CreateStudentType } from "../models/student.model";
+import { CreateStudentType } from "../models/student.model.js";
 
 
 const createStudentValidator = Joi.object<CreateStudentType>({

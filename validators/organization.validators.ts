@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { CreateOrganizationType } from "../models/organizations.model";
+import { CreateOrganizationType } from "../models/organizations.model.js";
 
 
 const createOrganizationValidator = Joi.object<CreateOrganizationType>({

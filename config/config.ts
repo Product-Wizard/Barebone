@@ -11,6 +11,8 @@ const config = Object.freeze({
   DATABASE_PORT: parseInt(process.env.DATABASE_PORT || "3600"),
   DEFAULT_PASSWORD: process.env.DEFAULT_PASSWORD,
   SERVER_PORT: parseInt(process.env.SERVER_PORT || "4000"),
+  JWS_SECRET: process.env.JWS_SECRET! || "jwt_secret!--==++@23",
+  JWT_EXPIRES: process.env.JWT_EXPIRES || "30d",
 })
 
 export default config

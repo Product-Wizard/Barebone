@@ -1,18 +1,31 @@
 import { DataTypes, Model } from "sequelize";
 
-import sequelize from "../config/db.config";
+import sequelize from "../config/db.config.js";
+import bcrypt from "bcryptjs";
+import config from "../config/config.js";
 
 export interface AdminModelInterface {
   id: number;
   email: string;
-  password: string;
+  password?: string;
   previledge: string[];
   defaultPassword: boolean;
 }
 
 type CreateAdminType = Omit<AdminModelInterface, "id" | "defaultPassword">
 
-class Admin extends Model<AdminModelInterface, CreateAdminType> { }
+class Admin extends Model<AdminModelInterface, CreateAdminType> {
+  getAdminData() {
+    const data = this.dataValues;
+    delete data.password;
+    return data;
+  }
+  static async hashPassword(password: string) {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(`${password || config.DEFAULT_PASSWORD!}`, salt);
+    return hashedPassword;
+  }
+}
 
 Admin.init({
   id: {
@@ -23,6 +36,7 @@ Admin.init({
   email: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true
   },
   password: {
     type: DataTypes.STRING,

@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 
-import sequelize from "../config/db.config";
+import sequelize from "../config/db.config.js";
 
 type company_size = "1-10" | "11-50" | "50+"
 export interface OrganizationModelInterface {

@@ -1,6 +1,6 @@
 import asyncHandeler from "express-async-handler";
-import Student, { StudentModelInterface } from "../models/student.model";
-import StudentValidators from "../validators/student.validators";
+import Student, { StudentModelInterface } from "../models/student.model.js";
+import StudentValidators from "../validators/student.validators.js";
 import bcrypt from "bcryptjs";
 
 

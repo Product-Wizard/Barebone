@@ -1,6 +1,6 @@
 import asyncHandeler from "express-async-handler";
-import Organization, { OrganizationModelInterface } from "../models/organizations.model";
-import OrganizationValidators from "../validators/organization.validators";
+import Organization, { OrganizationModelInterface } from "../models/organizations.model.js";
+import OrganizationValidators from "../validators/organization.validators.js";
 import bcrypt from "bcryptjs";
 
 
