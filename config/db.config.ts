@@ -11,6 +11,18 @@ const sequelize = new Sequelize(
     dialect: config.DATABASE_DIALECT,
     logging: false,
     port: config.DATABASE_PORT,
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false // Required for many cloud DB providers
+      },
+      connectTimeout: 60000 // 60 seconds (helps with cold starts on Render)
+    },
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 60000, // Timeout for getting a connection from the pool
+      idle: 10000
+    }
   });
 
 
