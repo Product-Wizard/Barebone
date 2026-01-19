@@ -2,11 +2,12 @@ import { Sequelize } from "sequelize";
 import config from "./config.js"
 
 
+console.log("config data: ", config);
 const sequelize = new Sequelize(
-  config.DATABASE_NAME!,
-  config.DATABASE_USERNAME!,
-  config.DATABASE_PASSWORD!,
   {
+    database: config.DATABASE_NAME!,
+    username: config.DATABASE_USERNAME!,
+    password: config.DATABASE_PASSWORD!,
     host: config.DATABASE_HOST!,
     dialect: config.DATABASE_DIALECT,
     logging: false,
