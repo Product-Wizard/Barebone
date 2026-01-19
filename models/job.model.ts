@@ -10,13 +10,13 @@ export interface JobModelInterface {
   type: JobType;
   category: CategoryType;
   link: string;
+  locale_type: string;
   // organization_id: number;
-  postedDate: string;
   description: string;
   readonly createdAt: string;
   readonly updatedAt: string;
 }
-export type CreateJobType = Omit<JobModelInterface, "id" | "postedDate">
+export type CreateJobType = Omit<JobModelInterface, "id">
 
 class Job extends Model<Omit<JobModelInterface, "createdAt" | "updatedAt">, CreateJobType> {
   getJobData() {
@@ -59,9 +59,11 @@ Job.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
-  postedDate: {
+  locale_type: {
     type: DataTypes.STRING,
-  },
+    defaultValue: null,
+    allowNull: true,
+  }
 
 }, {
   sequelize: sequelize,

@@ -32,4 +32,4 @@ server.listen(process.env.PORT || config.SERVER_PORT || 3000, (error) => {
   console.log(`server running on port ${config.SERVER_PORT}`)
 });
 await connectDb();
-await sequelize.sync();
+// await sequelize.sync();
