@@ -10,7 +10,9 @@ import authRoutes from "./routes/auth.router.js";
 import jobRoutes from "./routes/Job.router.js";
 
 const server = express();
-server.use(cors())
+server.use(cors({
+  origin: "*"
+}))
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 server.use(morgan("dev"));
@@ -25,7 +27,7 @@ server.use((req, res) => {
 
 server.use(errorResponseHandeler);
 
-server.listen(config.SERVER_PORT, (error) => {
+server.listen(process.env.PORT || config.SERVER_PORT || 3000, (error) => {
   if (error) console.log("server failed to start: ", error);
   console.log(`server running on port ${config.SERVER_PORT}`)
 });
