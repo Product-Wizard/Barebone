@@ -30,7 +30,7 @@ const adminLogin = asyncHandeler(async (req, res, next) => {
   }
   const token = jwt.sign(
     { email: admin.dataValues.email, id: admin.dataValues.id },
-    config.JWS_SECRET,
+    config.JWT_SECRET,
     { expiresIn: config.JWT_EXPIRES as any, algorithm: "HS256" }
   );
 

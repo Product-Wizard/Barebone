@@ -4,6 +4,12 @@ import { connectDb } from "../config/db.config.js";
 import config from "../config/config.js";
 connectDb
 
+/**
+ * WARNING⚠⚠🛑: do not add to AuthController Object
+ * @param email 
+ * @param password 
+ * @returns 
+ */
 export const createAdminProfile = async (email: string, password: string) => {
   await connectDb();
   const validatePasswordInput = password || config.DEFAULT_PASSWORD!
@@ -14,7 +20,7 @@ export const createAdminProfile = async (email: string, password: string) => {
 };
 
 const AuthControllers = {
-  createAdminProfile,
+
 };
 
 
