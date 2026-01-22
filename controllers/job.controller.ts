@@ -2,7 +2,8 @@
 import asyncHandeler from "express-async-handler";
 import Job from "../models/job.model.js";
 import JobValidators from "../validators/job.validators.js";
-import { Op } from "sequelize";
+import { Op, Sequelize } from "sequelize";
+import JobApplication from "../models/jobApplication.model.js";
 
 const getJobs = asyncHandeler(async (req, res, next) => {
   const { type, page: stringPage, perPage: stringPerPage, ...othersQueryParams } = req.query
@@ -20,6 +21,24 @@ const getJobs = asyncHandeler(async (req, res, next) => {
     order: [ [ "createdAt", "desc" ] ],
     offset: page > 1 ? (page - 1) * perPage : 0,
     where: whereQuery,
+    attributes: {
+      include: [
+        // This adds a virtual field called 'applicationCount'
+        [
+          Sequelize.fn("COUNT", Sequelize.col("applications.id")),
+          "applicants_count"
+        ]
+      ]
+    },
+    include: [
+      {
+        model: JobApplication,
+        as: "applications",
+        attributes: [] // We leave this empty so we don't get all application data back
+      }
+    ],
+    group: [ "job.id" ], // Groups by the Job ID so the count is per-job
+    subQuery: false    // Important: Using 'limit' with 'include' and 'group' often requires this
   });
 
   const totalJobs = await Job.count({

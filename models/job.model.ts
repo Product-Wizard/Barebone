@@ -1,7 +1,11 @@
 import { DataTypes, Model, } from "sequelize";
 import sequelize from "../config/db.config.js";
+import JobApplication from "./jobApplication.model.js";
 export type JobType = 'remote' | 'on-site' | 'hybrid';
-export type CategoryType = "marketing" | "tech" | "admin" | "research" | "finance" | "design";
+export type CategoryType = "stem " | "humanities_and_art" | "commercial_and_finance" | "non_Profit";
+// export type CategoryType = "marketing" | "tech" | "admin" | "research" | "finance" | "design";
+export type JobTrainigScope = "siwes_or_general" | "graduate_training" | "international" | "";
+
 export interface JobModelInterface {
   id: string;
   title: string;
@@ -10,7 +14,7 @@ export interface JobModelInterface {
   type: JobType;
   category: CategoryType;
   link: string;
-  locale_type: string;
+  job_training_scope: string;
   // organization_id: number;
   description: string;
   readonly createdAt: string;
@@ -59,7 +63,7 @@ Job.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
-  locale_type: {
+  job_training_scope: {
     type: DataTypes.STRING,
     defaultValue: null,
     allowNull: true,
@@ -67,7 +71,8 @@ Job.init({
 
 }, {
   sequelize: sequelize,
-  modelName: "Job",
+  modelName: "job",
 });
+
 
 export default Job;
