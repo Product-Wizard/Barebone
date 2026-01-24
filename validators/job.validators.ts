@@ -8,9 +8,10 @@ const createJobValidator = Joi.object<CreateJobType>({
   description: Joi.string().required(),
   location: Joi.string().required(),
   link: Joi.string().required().uri(),
-  // organization_id: Joi.number().required(),
+  state: Joi.string().required().allow(""),
   type: Joi.string().required().valid('remote', 'on-site', 'hybrid'),
   job_training_scope: Joi.string().required().valid("siwes_or_general", "graduate_training", "international"),
+
 });
 
 const updateJobValidator = Joi.object<CreateJobType>({
@@ -20,7 +21,7 @@ const updateJobValidator = Joi.object<CreateJobType>({
   description: Joi.string().required(),
   location: Joi.string().required(),
   link: Joi.string().required().uri(),
-  // organization_id: Joi.number().required(),
+  state: Joi.string().required().allow(""),
   type: Joi.string().required().valid('remote', 'on-site', 'hybrid'),
   job_training_scope: Joi.string().required().valid("siwes_or_general", "graduate_training", "international"),
 });

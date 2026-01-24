@@ -15,6 +15,7 @@ export interface JobModelInterface {
   category: CategoryType;
   link: string;
   job_training_scope: string;
+  state: string;
   // organization_id: number;
   description: string;
   readonly createdAt: string;
@@ -64,6 +65,11 @@ Job.init({
     allowNull: false,
   },
   job_training_scope: {
+    type: DataTypes.STRING,
+    defaultValue: null,
+    allowNull: true,
+  },
+  state: {
     type: DataTypes.STRING,
     defaultValue: null,
     allowNull: true,

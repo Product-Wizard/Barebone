@@ -6,16 +6,31 @@ import { Op, Sequelize } from "sequelize";
 import JobApplication from "../models/jobApplication.model.js";
 
 const getJobs = asyncHandeler(async (req, res, next) => {
-  const { type, page: stringPage, perPage: stringPerPage, ...othersQueryParams } = req.query
+  const {
+    type,
+    on_site,
+    remote,
+    hybrid,
+    category_by_user,
+    state_by_user,
+    page: stringPage,
+    perPage: stringPerPage,
+    ...othersQueryParams
+  } = req.query
   const page = parseInt(stringPage as string || "1");
   const perPage = parseInt(stringPerPage as string || "50");
   const otherQueryKeys = Object.keys(othersQueryParams);
   const orQueryKeys: any[] | undefined = otherQueryKeys.length === 0 ? undefined :
     otherQueryKeys.map((key) => ({ [ key ]: { [ Op.like ]: `%${othersQueryParams[ key as any ]}%` } }));
-
+  const typeOrQuery = [ on_site, remote, hybrid ].filter(item => item).map(item => item);
+  console.log(typeOrQuery);
   let whereQuery: any = {};
-  if (orQueryKeys) whereQuery = { ...whereQuery, [ Op.or ]: [ ...orQueryKeys ] };
-  if (type) whereQuery.type = type;
+  if (orQueryKeys)
+    whereQuery = { ...whereQuery, [ Op.or ]: [ ...orQueryKeys ] };
+  if (type) whereQuery.type = type; //match job type for admins only
+  if (state_by_user) whereQuery.state = state_by_user; // match state for users only
+  if (category_by_user) whereQuery.category = category_by_user; // match category for user only
+  if (typeOrQuery.length > 0) whereQuery.type = { [ Op.or ]: typeOrQuery }; // match job type for users only
   const jobs = await Job.findAll({
     limit: perPage,
     order: [ [ "createdAt", "desc" ] ],
