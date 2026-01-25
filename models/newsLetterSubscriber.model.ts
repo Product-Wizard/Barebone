@@ -1,10 +1,11 @@
 import { DataTypes, Model, } from "sequelize";
-
 import sequelize from "../config/db.config.js";
+import { randomBytes } from "node:crypto"
 
 export interface NewsLetterSubscriberModelInterface {
   id: number;
   email: string;
+  deteteToken?: string;
 }
 
 export type CreateNewsLetterSubscriberType = Omit<NewsLetterSubscriberModelInterface, "id">
@@ -12,6 +13,7 @@ export type CreateNewsLetterSubscriberType = Omit<NewsLetterSubscriberModelInter
 class NewsLetterSubscriber extends Model<NewsLetterSubscriberModelInterface, CreateNewsLetterSubscriberType> {
   getNewsLetterSubscriberData() {
     const data = this.dataValues;
+    delete data.deteteToken;
     return data;
   }
 }
@@ -26,6 +28,10 @@ NewsLetterSubscriber.init({
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
+  },
+  deteteToken: {
+    type: DataTypes.STRING,
+    defaultValue: () => randomBytes(20).toString("hex"),
   }
 }, {
   sequelize: sequelize,
