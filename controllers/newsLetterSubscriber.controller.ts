@@ -20,8 +20,8 @@ const createNewsLetterSubscriber = asyncHandeler(async (req, res, next) => {
   if (existingNewsLetterSubscriber) {
     res.status(200).json({
       error: false,
-      message: "you have sucesfully subscribed to our newsletter.",
-      // message: "Sorry you already sunscribed to our newsletter.",
+      message: "Succesful",
+      // message: "Sorry you already subscribed to our newsletter.",
       data: null,
     });
     return;
@@ -30,7 +30,7 @@ const createNewsLetterSubscriber = asyncHandeler(async (req, res, next) => {
   res.status(201).json({
     error: false,
     data: newsLetterSubscriber.getNewsLetterSubscriberData(),
-    message: "you have sucesfully subscribed to our newsletter"
+    message: "Succesful"
   })
 });
 
