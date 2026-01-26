@@ -25,6 +25,7 @@ server.use(morgan("dev"));
 server.use(express.static("./public"));
 
 // routes
+server.get("/", (req, res) => res.status(200).json({ error: false, data: null, message: "server running" }))
 server.use("/v1/auth", authRoutes);
 server.use("/v1/job", jobRoutes);
 server.use("/v1/job_application", jobApplicationRoutes);
