@@ -52,10 +52,10 @@ const getNewsLetterSubscribers = asyncHandeler(async (req, res, next) => {
     where: whereQuery,
   });
 
-  const totalNewsLetters = await NewsLetterSubscriber.count({
+  const totalNewsLetterSubscribers = await NewsLetterSubscriber.count({
     where: whereQuery,
   });
-  const pagesCount = Math.ceil(totalNewsLetters / perPage)
+  const pagesCount = Math.ceil(totalNewsLetterSubscribers / perPage)
   res.status(200).json({
     error: false,
     data: newsLettersSubscribers,

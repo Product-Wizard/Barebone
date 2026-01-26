@@ -17,6 +17,14 @@ const createStudent = asyncHandeler(async (req, res, next) => {
     });
     return;
   }
+  const existingStudent = await Student.findOne({ where: { email: value.email } });
+  if (existingStudent) {
+    res.status(400).json({
+      error: true,
+      message: `sorry the email "${value.email}" is already taken`,
+      data: null,
+    })
+  }
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(`${process.env.DEFAULT_PASSWORD!}`, salt);
   const data: Omit<StudentModelInterface, "id" | "defaultPassword"> = {

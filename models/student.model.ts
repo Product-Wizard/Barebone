@@ -2,12 +2,13 @@ import { DataTypes, Model, } from "sequelize";
 
 import sequelize from "../config/db.config.js";
 
-export type year_of_study = "fresh_man" | "sophomore" | "junior" | "senior";
+export type internship_type = "general_internship" | "siwes" | "graduate_opportunities" | "students_sign_up";
+// export type year_of_study = "fresh_man" | "sophomore" | "junior" | "senior";
 export interface StudentModelInterface {
   id: number;
   email: string;
   full_name: string;
-  year_of_study: year_of_study;
+  internship_type: internship_type;
   course_of_study: string;
   password?: string;
   defaultPassword: boolean;
@@ -51,7 +52,7 @@ Student.init({
     defaultValue: true,
     allowNull: true
   },
-  year_of_study: {
+  internship_type: {
     type: DataTypes.STRING,
     allowNull: false,
   }
